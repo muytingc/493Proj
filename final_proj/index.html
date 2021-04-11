@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title> Final Project </title>
+    <style>
+        .important {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- app -->
+    <div id="app">
+        <!-- nav -->
+        <nav id="nav">
+            <a href="#agenda" class="fas fa-home" v-on:click="openAgenda()">
+                <span class="text_hover">Home</span>
+            </a>
+            <a href="#settings" class="fas fa-cog" v-on:click="openSettings()">
+                <span class="text_hover">Settings</span>
+            </a>
+            <a href="#motivation" class="fas fa-star" v-on:click="openMotivation()">
+                <span class="text_hover">Motivation</span>
+            </a>
+        </nav>
+        <!-- main -->
+        <div class="main">
+            <article id="agenda" v-bind:class="{active_flex: agenda_active}">
+                <div class="col">
+                    <h2>Sunday</h2>
+                    <ol>
+                        <li v-for="(todo, idx) in todos_sun" v-bind:class="{'important': (todo.isImportant === true)}">
+                            <div> {{ todo.title }} </div>
+                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        </li> 
+                    </ol>
+                </div>
+        
+                <div class="col">
+                    <h2>Monday</h2>
+                    <ol>
+                        <li v-for="(todo, idx) in todos_mon" v-bind:class="{'important': (todo.isImportant === true)}">
+                            <div> {{ todo.title }} </div>
+                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        </li> 
+                    </ol>
+                </div>
+    
+                <div class="col">
+                    <h2>Tuesday</h2>
+                    <ol>
+                        <li v-for="(todo, idx) in todos_tue" v-bind:class="{'important': (todo.isImportant === true)}">
+                            <div> {{ todo.title }} </div>
+                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        </li> 
+                    </ol>
+                </div>
+    
+                <div class="col">
+                    <h2>Wednesday</h2>
+                    <ol>
+                        <li v-for="(todo, idx) in todos_wed" v-bind:class="{'important': (todo.isImportant === true)}">
+                            <div> {{ todo.title }} </div>
+                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        </li> 
+                    </ol>
+                </div>
+    
+                <div class="col">
+                    <h2>Thursday</h2>
+                    <ol>
+                        <li v-for="(todo, idx) in todos_thu" v-bind:class="{'important': (todo.isImportant === true)}">
+                            <div> {{ todo.title }} </div>
+                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        </li> 
+                    </ol>
+                </div>
+    
+                <div class="col">
+                    <h2>Friday</h2>
+                    <ol>
+                        <li v-for="(todo, idx) in todos_fri" v-bind:class="{'important': (todo.isImportant === true)}">
+                            <div> {{ todo.title }} </div>
+                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        </li> 
+                    </ol>
+                </div>
+    
+                <div class="col">
+                    <h2>Saturday</h2>
+                    <ol>
+                        <li v-for="(todo, idx) in todos_sat" v-bind:class="{'important': (todo.isImportant === true)}">
+                            <div> {{ todo.title }} </div>
+                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        </li> 
+                    </ol>
+                </div>
+
+                <div class="charts">
+                    <h1>Steps Chart</h1>
+                    <div id="chartDiv">
+                        <canvas id="stepsChart" width="100" height="100"></canvas>
+                    </div>
+                    <p>It's recommended to take 10,000 steps daily</p>
+
+                    <h1>Activities Chart</h1>
+                    <div id="chartDiv">
+                        <canvas id="actChart" width="100" height="100"></canvas>
+                    </div>
+                    <p>We recommend you complete at least 60% of your activities each day</p>
+                </div>
+            </article>
+
+            <article id="motivation" v-bind:class="{active_block: motivation_active}">
+                <h1> Today's Motivational Quote </h1>
+
+                <div id="image">
+                    <img id="img" v-bind:src="currentImage" alt="currImage">
+                    <br>
+                    <button class="button button5" type="button" v-on:click="changeImage();"> New Quote </button>
+                </div>
+            </article>
+    
+            <article id="settings" v-bind:class="{active_block: settings_active}">
+                <h1>Settings Page</h1> 
+                <input type="text" v-model="newTodo">
+                <button v-on:click="addTodo()">Add Todo</button> 
+                <input type="text" id="mondaySteps">
+                <button onclick="updateMonday(document.getElementById('mondaySteps').value)">Update Steps</button>
+            </article>
+        </div>
+        <!-- end of main -->
+        
+    </div>
+    <!-- end of app -->
+</body>
+
+<!-- vueJS -->
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            agenda_active: true,
+            settings_active: false,
+            motivation_active: false,
+            imageIndex: 0,
+            currentImage: "",
+            imageList: [],
+            newTodo: '',
+            todos_sun: [
+                {
+                    title: 'buy milk',
+                    isImportant: false
+                }, 
+                {
+                    title: 'workout and read a bunch of manga for the purpose of anime watching season',
+                    isImportant: false
+                }
+            ],
+            todos_mon: [
+                {
+                    title: 'WORKOUT',
+                    isImportant: true
+                },
+                {
+                    title: 'DRINK WATER',
+                    isImportant: false
+                },
+                {
+                    title: 'do a back workout that involves using the delts and lats a ton, so that I look jacked',
+                    isImportant: false
+                }
+            ],
+            todos_tue: [
+                {
+                    title: 'EAT',
+                    isImportant: false
+                }
+            ],
+            todos_wed: [
+                {
+                    title: 'SWIM',
+                    isImportant: false
+                }
+            ],
+            todos_thu: [
+                {
+                    title: 'BIKE',
+                    isImportant: false
+                }
+            ],
+            todos_fri: [
+                {
+                    title: 'RUN',
+                    isImportant: true
+                }
+            ],
+            todos_sat: [
+                {
+                    title: 'SLEEP',
+                    isImportant: false
+                }
+            ],
+        },
+        methods: {
+            addTodo() {
+                if (this.newTodo.trim() != '') {
+                    if (this.newTodo.includes('IMPORTANT')) {
+                        this.todos_sun.push({
+                        title: this.newTodo,
+                        isImportant: true
+                        });
+                    } else {
+                        this.todos_sun.push({
+                        title: this.newTodo,
+                        isImportant: false
+                        });
+                    }
+                }
+                this.newTodo = '';
+            },
+            deleteTodo(idx) {
+                this.todos.splice(idx, 1);
+            },
+            openAgenda() {
+                this.agenda_active = true;
+                this.settings_active = false;
+                this.motivation_active = false;
+            },
+            openSettings() {
+                this.settings_active = true;
+                this.agenda_active = false;
+                this.motivation_active = false;
+            },
+            openMotivation() {
+                this.motivation_active = true;
+                this.agenda_active = false;
+                this.settings_active = false;
+            },
+            changeImage() {
+            // maybe do settimeout to do faded change
+            this.imageIndex += 1;
+            this.updateCurrentImage();
+            console.log("changed");
+            },
+            initializeImages() {
+                for (let i = 1; i <= 7; i++) {
+                    let img = "imgs/"
+                    img += i.toString() + ".jpg";
+                    this.imageList.push(img);
+                }
+            },
+            updateCurrentImage() {
+                // first let's do no random image but just start from first and iterate to last
+                this.currentImage = this.imageList[this.imageIndex % 7];
+            }
+        },
+        beforeMount(){
+            this.initializeImages();
+            this.updateCurrentImage();
+        }
+    });
+</script>
+
+<!-- chartJS -->
+<script>
+    var ctx0 = document.getElementById('stepsChart');
+    var userSteps = [5912, 4835, 5230, 6720, 6200, 5500, 3940]; //Replace this with the input by the user
+    var stepsChart = new Chart(ctx0, {
+        type: 'line',
+        data: {
+            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday ', 'Thursday', 'Friday', 'Saturday'],
+            datasets: [{
+                label: 'Personal Steps',
+                data: userSteps,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 3
+            },
+            {
+                label: 'Averarage American Daily Steps',
+                data: [5000, 5000, 5000, 5000, 5000, 5000, 5000],
+                backgroundColor: [
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 3 
+            },
+
+            {
+                label: 'Goal Daily Steps',
+                data: [10000, 10000, 10000, 10000, 10000, 10000, 10000],
+                backgroundColor: [
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)',
+                    'rgba(0, 0, 0, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 3 
+            },
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+
+                    gridLines:{
+                      display: true
+                    },
+                }
+            }
+        }
+    });
+
+    var totalTasks = 100;
+    var tasksComplete = 25; //Replace this with the input by the user
+    var ctx1 = document.getElementById('actChart');
+    var actChart = new Chart(ctx1, {
+        type: 'pie',
+        data: {
+            labels: ['complete', 'Incomplete'],
+            datasets: [{
+                label: 'Personal Steps',
+                data: [tasksComplete, totalTasks - tasksComplete],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 3,
+                hoverOffset: 10,
+            }]
+        },
+        options: {
+
+        }
+    });
+
+    function updateMonday(mondaySteps){
+        userSteps[1] = mondaySteps;
+        stepsChart.update();
+    }
+  </script>
+
+</html>
