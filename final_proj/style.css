@@ -12,6 +12,7 @@
 
 #agenda h2 {
     margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .active_flex {
@@ -72,7 +73,12 @@ ol, ul {
 
 li {
     border-top: 2px solid rebeccapurple;
-    margin-top: 2px;
+    margin-top: 5px;
+}
+
+li p {
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .charts {
@@ -133,6 +139,11 @@ li {
   .button5:hover {
     background-color: #555555;
     color: white;
+  }
+
+  .starred {
+      font-weight: 800;
+      color: orangered;
   }
 
 @media (max-width: 1200px) {

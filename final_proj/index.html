@@ -31,7 +31,7 @@
                 <span class="text_hover">Motivation</span>
             </a>
             <a target="_blank" href="https://www.nutrition.gov/" class="fas fa-apple-alt">
-                <span class="text_hover">Nutrition</span>
+                <span class="text_hover">nutrition.gov</span>
             </a>
         </nav>
         <!-- main -->
@@ -40,9 +40,12 @@
                 <div class="col">
                     <h2>Sunday</h2>
                     <ol>
-                        <li v-for="(todo, idx) in todos_sun" v-bind:class="{'important': (todo.isImportant === true)}">
-                            <div> {{ todo.title }} </div>
-                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        <li v-for="(todo, idx) in todos_sun" v-bind:class="{'starred': (todo.isStarred === true)}">
+                            <div>
+                                <p> {{ todo.title }} </p>
+                                <div><button v-on:click="deleteTodoSun(idx)">Remove</button></div>
+                                <div><button id="star1" v-on:click="starTodoSun(todo)">Star this</button></div>
+                            </div>
                         </li> 
                     </ol>
                 </div>
@@ -50,9 +53,12 @@
                 <div class="col">
                     <h2>Monday</h2>
                     <ol>
-                        <li v-for="(todo, idx) in todos_mon" v-bind:class="{'important': (todo.isImportant === true)}">
-                            <div> {{ todo.title }} </div>
-                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        <li v-for="(todo, idx) in todos_mon" v-bind:class="{'starred': (todo.isStarred === true)}">
+                            <div>
+                                <p> {{ todo.title }} </p>
+                                <div><button v-on:click="deleteTodoMon(idx)">Remove</button></div>
+                                <div><button id="star2" v-on:click="starTodoMon(todo)">Star this</button></div>
+                            </div>
                         </li> 
                     </ol>
                 </div>
@@ -60,9 +66,12 @@
                 <div class="col">
                     <h2>Tuesday</h2>
                     <ol>
-                        <li v-for="(todo, idx) in todos_tue" v-bind:class="{'important': (todo.isImportant === true)}">
-                            <div> {{ todo.title }} </div>
-                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        <li v-for="(todo, idx) in todos_tue" v-bind:class="{'starred': (todo.isStarred === true)}">
+                            <div>
+                                <p> {{ todo.title }} </p>
+                                <div><button v-on:click="deleteTodoTue(idx)">Remove</button></div>
+                                <div><button id="star3" v-on:click="starTodoTue(todo)">Star this</button></div>
+                            </div>
                         </li> 
                     </ol>
                 </div>
@@ -70,19 +79,25 @@
                 <div class="col">
                     <h2>Wednesday</h2>
                     <ol>
-                        <li v-for="(todo, idx) in todos_wed" v-bind:class="{'important': (todo.isImportant === true)}">
-                            <div> {{ todo.title }} </div>
-                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
-                        </li> 
+                        <li v-for="(todo, idx) in todos_wed" v-bind:class="{'starred': (todo.isStarred === true)}">
+                            <div>
+                                <p> {{ todo.title }} </p>
+                                <div><button v-on:click="deleteTodoWed(idx)">Remove</button></div>
+                                <div><button id="star4" v-on:click="starTodoWed(todo)">Star this</button></div>
+                            </div>
+                        </li>
                     </ol>
                 </div>
     
                 <div class="col">
                     <h2>Thursday</h2>
                     <ol>
-                        <li v-for="(todo, idx) in todos_thu" v-bind:class="{'important': (todo.isImportant === true)}">
-                            <div> {{ todo.title }} </div>
-                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        <li v-for="(todo, idx) in todos_thu" v-bind:class="{'starred': (todo.isStarred === true)}">
+                            <div>
+                                <p> {{ todo.title }} </p>
+                                <div><button v-on:click="deleteTodoThu(idx)">Remove</button></div>
+                                <div><button id="star5" v-on:click="starTodoThu(todo)">Star this</button></div>
+                            </div>
                         </li> 
                     </ol>
                 </div>
@@ -90,9 +105,12 @@
                 <div class="col">
                     <h2>Friday</h2>
                     <ol>
-                        <li v-for="(todo, idx) in todos_fri" v-bind:class="{'important': (todo.isImportant === true)}">
-                            <div> {{ todo.title }} </div>
-                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        <li v-for="(todo, idx) in todos_fri" v-bind:class="{'starred': (todo.isStarred === true)}">
+                            <div>
+                                <p> {{ todo.title }} </p>
+                                <div><button v-on:click="deleteTodoFri(idx)">Remove</button></div>
+                                <div><button id="star6" v-on:click="starTodoFri(todo)">Star this</button></div>
+                            </div>
                         </li> 
                     </ol>
                 </div>
@@ -100,9 +118,12 @@
                 <div class="col">
                     <h2>Saturday</h2>
                     <ol>
-                        <li v-for="(todo, idx) in todos_sat" v-bind:class="{'important': (todo.isImportant === true)}">
-                            <div> {{ todo.title }} </div>
-                            <button v-on:click="deleteTodo(idx)">Delete Todo</button>
+                        <li v-for="(todo, idx) in todos_sat" v-bind:class="{'starred': (todo.isStarred === true)}">
+                            <div>
+                                <p> {{ todo.title }} </p>
+                                <div><button v-on:click="deleteTodoSat(idx)">Remove</button></div>
+                                <div><button id="star7" v-on:click="starTodoSat(todo)">Star this</button></div>
+                            </div>
                         </li> 
                     </ol>
                 </div>
@@ -133,11 +154,51 @@
             </article>
     
             <article id="settings" v-bind:class="{active_block: settings_active}">
-                <h1>Settings Page</h1> 
-                <input type="text" v-model="newTodo">
-                <button v-on:click="addTodo()">Add Todo</button> 
-                <input type="text" id="mondaySteps">
-                <button onclick="updateMonday(document.getElementById('mondaySteps').value)">Update Steps</button>
+                <h1>Settings Page</h1>
+
+                <!-- Agenda input -->
+                <div class="inputAgenda">
+                    <div>
+                        <input type="text" v-model="newTodoSun">
+                        <button v-on:click="addTodoSun()">Add item to Sunday Agenda</button>
+                    </div> 
+    
+                    <div>
+                        <input type="text" v-model="newTodoMon">
+                        <button v-on:click="addTodoMon()">Add item to Monday Agenda</button>
+                    </div> 
+    
+                    <div>
+                        <input type="text" v-model="newTodoTue">
+                        <button v-on:click="addTodoTue()">Add item to Tuesday Agenda</button>
+                    </div>
+                    
+                    <div>
+                        <input type="text" v-model="newTodoWed">
+                        <button v-on:click="addTodoWed()">Add item to Wednesday Agenda</button>
+                    </div>
+                     
+                    <div>
+                        <input type="text" v-model="newTodoThu">
+                        <button v-on:click="addTodoThu()">Add item to Thursday Agenda</button>
+                    </div>
+                    
+                    <div>
+                        <input type="text" v-model="newTodoFri">
+                        <button v-on:click="addTodoFri()">Add item to Friday Agenda</button>
+                    </div>
+    
+                    <div>
+                        <input type="text" v-model="newTodoSat">
+                        <button v-on:click="addTodoSat()">Add item to Saturday Agenda</button>
+                    </div>
+                </div>
+                
+                <!-- chartJS input -->
+                <div class="inputChart">
+                    <input type="text" id="mondaySteps">
+                    <button onclick="updateMonday(document.getElementById('mondaySteps').value)">Update Steps</button>
+                </div>
             </article>
         </div>
         <!-- end of main -->
@@ -157,81 +218,203 @@
             imageIndex: 0,
             currentImage: "",
             imageList: [],
-            newTodo: '',
+            newTodoSun: '',
+            newTodoMon: '',
+            newTodoTue: '',
+            newTodoWed: '',
+            newTodoThu: '',
+            newTodoFri: '',
+            newTodoSat: '',
             todos_sun: [
                 {
-                    title: 'buy milk',
-                    isImportant: false
-                }, 
-                {
-                    title: 'workout and read a bunch of manga for the purpose of anime watching season',
-                    isImportant: false
+                    title: 'Rest',
+                    isStarred: false
                 }
             ],
             todos_mon: [
                 {
-                    title: 'WORKOUT',
-                    isImportant: true
-                },
-                {
-                    title: 'DRINK WATER',
-                    isImportant: false
-                },
-                {
-                    title: 'do a back workout that involves using the delts and lats a ton, so that I look jacked',
-                    isImportant: false
+                    title: 'Chest and Triceps',
+                    isStarred: false
                 }
             ],
             todos_tue: [
                 {
-                    title: 'EAT',
-                    isImportant: false
+                    title: 'Back and Biceps',
+                    isStarred: false
                 }
             ],
             todos_wed: [
                 {
-                    title: 'SWIM',
-                    isImportant: false
+                    title: 'Rest',
+                    isStarred: false
                 }
             ],
             todos_thu: [
                 {
-                    title: 'BIKE',
-                    isImportant: false
+                    title: 'Shoulders and Abs',
+                    isStarred: false
                 }
             ],
             todos_fri: [
                 {
-                    title: 'RUN',
-                    isImportant: true
+                    title: 'Legs and Cardio',
+                    isStarred: false
                 }
             ],
             todos_sat: [
                 {
-                    title: 'SLEEP',
-                    isImportant: false
+                    title: 'Rest',
+                    isStarred: false
                 }
             ],
         },
         methods: {
-            addTodo() {
-                if (this.newTodo.trim() != '') {
-                    if (this.newTodo.includes('IMPORTANT')) {
-                        this.todos_sun.push({
-                        title: this.newTodo,
-                        isImportant: true
-                        });
-                    } else {
-                        this.todos_sun.push({
-                        title: this.newTodo,
-                        isImportant: false
-                        });
-                    }
+            starTodoSun(todo) {
+                if (todo.isStarred === true) {
+                    $('#star1').text('Star this');
+                    todo.isStarred = false;
+                } else {
+                    $('#star1').text('Un-Star this');
+                    todo.isStarred = true;
                 }
-                this.newTodo = '';
             },
-            deleteTodo(idx) {
-                this.todos.splice(idx, 1);
+            starTodoMon(todo) {
+                if (todo.isStarred === true) {
+                    $('#star2').text('Star this');
+                    todo.isStarred = false;
+                } else {
+                    $('#star2').text('Un-Star this');
+                    todo.isStarred = true;
+                }
+            },
+            starTodoTue(todo) {
+                if (todo.isStarred === true) {
+                    $('#star3').text('Star this');
+                    todo.isStarred = false;
+                } else {
+                    $('#star3').text('Un-Star this');
+                    todo.isStarred = true;
+                }
+            },
+            starTodoWed(todo) {
+                if (todo.isStarred === true) {
+                    $('#star4').text('Star this');
+                    todo.isStarred = false;
+                } else {
+                    $('#star4').text('Un-Star this');
+                    todo.isStarred = true;
+                }
+            },
+            starTodoThu(todo) {
+                if (todo.isStarred === true) {
+                    $('#star5').text('Star this');
+                    todo.isStarred = false;
+                } else {
+                    $('#star5').text('Un-Star this');
+                    todo.isStarred = true;
+                }
+            },
+            starTodoFri(todo) {
+                if (todo.isStarred === true) {
+                    $('#star6').text('Star this');
+                    todo.isStarred = false;
+                } else {
+                    $('#star6').text('Un-Star this');
+                    todo.isStarred = true;
+                }
+            },
+            starTodoSat(todo) {
+                if (todo.isStarred === true) {
+                    $('#star7').text('Star this');
+                    todo.isStarred = false;
+                } else {
+                    $('#star7').text('Un-Star this');
+                    todo.isStarred = true;
+                }
+            },
+            addTodoSun() {
+                if (this.newTodoSun.trim() != '') {
+                    this.todos_sun.push({
+                    title: this.newTodoSun,
+                    isStarred: false
+                    });
+                }
+                this.newTodoSun = '';
+            },
+            addTodoMon() {
+                if (this.newTodoMon.trim() != '') {
+                    this.todos_mon.push({
+                    title: this.newTodoMon,
+                    isStarred: false
+                    });
+                }
+                this.newTodoMon = '';
+            },
+            addTodoTue() {
+                if (this.newTodoTue.trim() != '') {
+                    this.todos_tue.push({
+                    title: this.newTodoTue,
+                    isStarred: false
+                    });
+                }
+                this.newTodoTue = '';
+            },
+            addTodoWed() {
+                if (this.newTodoWed.trim() != '') {
+                    this.todos_wed.push({
+                    title: this.newTodoWed,
+                    isStarred: false
+                    });
+                }
+                this.newTodoWed = '';
+            },
+            addTodoThu() {
+                if (this.newTodoThu.trim() != '') {
+                    this.todos_thu.push({
+                    title: this.newTodoThu,
+                    isStarred: false
+                    });
+                }
+                this.newTodoThu = '';
+            },
+            addTodoFri() {
+                if (this.newTodoFri.trim() != '') {
+                    this.todos_fri.push({
+                    title: this.newTodoFri,
+                    isStarred: false
+                    });
+                }
+                this.newTodoFri = '';
+            },
+            addTodoSat() {
+                if (this.newTodoSat.trim() != '') {
+                    this.todos_sat.push({
+                    title: this.newTodoSat,
+                    isStarred: false
+                    });
+                }
+                this.newTodoSat = '';
+            },
+            deleteTodoSun(idx) {
+                this.todos_sun.splice(idx, 1);
+            },
+            deleteTodoMon(idx) {
+                this.todos_mon.splice(idx, 1);
+            },
+            deleteTodoTue(idx) {
+                this.todos_tue.splice(idx, 1);
+            },
+            deleteTodoWed(idx) {
+                this.todos_wed.splice(idx, 1);
+            },
+            deleteTodoThu(idx) {
+                this.todos_thu.splice(idx, 1);
+            },
+            deleteTodoFri(idx) {
+                this.todos_fri.splice(idx, 1);
+            },
+            deleteTodoSat(idx) {
+                this.todos_sat.splice(idx, 1);
             },
             openAgenda() {
                 this.agenda_active = true;
