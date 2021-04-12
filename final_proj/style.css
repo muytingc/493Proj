@@ -5,9 +5,15 @@
 
 #agenda .col {
     width: 14%;
-    background-color: aquamarine;
+    background-color: #C6F8E5;
     margin-top: 5px;
     margin-bottom: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+#agenda .col:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 #agenda h2 {
@@ -23,6 +29,34 @@
     display: block;
 }
 
+.col button {
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #ffffff;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    color:#ffffff;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: #ff7171;
+    outline: none;
+}
+
+.col button:hover {
+    color:#ff7171;
+    background-color:#ffffff;
+}
+
+.col button.starry {
+    background-color: #f5c0c0;
+}
+.col button.starry:hover {
+    color:#f5c0c0;
+    background-color:#ffffff;
+}
+
 nav {
     display: block;
     position: fixed;
@@ -34,7 +68,7 @@ nav {
     width: 100%;
     height: 4em;
     z-index: 80;
-    background: lightblue;
+    background: #aee1e1;
 }
 
 nav a {
@@ -63,6 +97,9 @@ article {
 html {
     margin-left: 100px;
     margin-right: 100px;
+    color: #6e7582;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
 }
 
 ol, ul {
@@ -85,15 +122,20 @@ li p {
     width: 100%;
 }
 
-#chartDiv {
+.chartDiv {
     width: 50%; /* Can be in percentage also. */
     height: auto;
     margin: 0 auto;
-    padding: 10px;
+    padding: 1rem;
     position: relative;
-    outline-color: black;
-    outline-style: solid;
-    outline-width: 5px;
+    background: linear-gradient(to right, #CCE1F2,#E2BEF1);
+    padding: 5px;
+}
+
+.chartDiv canvas {
+    background: #ffffff;
+    color: white;
+    padding: 2rem;
 }
 
 #motivation {
@@ -145,10 +187,17 @@ li p {
       font-weight: 800;
       color: orangered;
   }
+  
+  @media (max-width: 1200px) {
+      .col {
+      max-width: 100%;
+      flex: 100%;
+    }
 
-@media (max-width: 1200px) {
-    .col {
-        max-width: 100%;
-        flex: 100%;
+  @media all and (max-width:30em){
+      .col button{
+          display:block;
+          margin:0.4em auto;
+      }
     }
 }
