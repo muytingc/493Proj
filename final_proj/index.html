@@ -33,6 +33,7 @@
             <a target="_blank" href="https://www.nutrition.gov/" class="fas fa-apple-alt">
                 <span class="text_hover">nutrition.gov</span>
             </a>
+            THE TITLE OF THIS SITE
         </nav>
         <!-- main -->
         <div class="main">
@@ -159,44 +160,37 @@
                 <!-- Agenda input -->
                 <div class="inputAgenda">
                     <div>
-                        <input type="text" v-model="newTodoSun">
-                        <button v-on:click="addTodoSun()">Add item to Sunday Agenda</button>
+                        <input type="text" v-model="newTodoSun" v-on:keyup.enter="addTodoSun()" placeholder="Add item to Sunday Agenda...">
                     </div> 
     
                     <div>
-                        <input type="text" v-model="newTodoMon">
-                        <button v-on:click="addTodoMon()">Add item to Monday Agenda</button>
+                        <input type="text" v-model="newTodoMon" v-on:keyup.enter="addTodoMon()" placeholder="Add item to Monday Agenda...">
                     </div> 
     
                     <div>
-                        <input type="text" v-model="newTodoTue">
-                        <button v-on:click="addTodoTue()">Add item to Tuesday Agenda</button>
+                        <input type="text" v-model="newTodoTue" v-on:keyup.enter="addTodoTue()" placeholder="Add item to Tuesday Agenda...">
                     </div>
                     
                     <div>
-                        <input type="text" v-model="newTodoWed">
-                        <button v-on:click="addTodoWed()">Add item to Wednesday Agenda</button>
+                        <input type="text" v-model="newTodoWed" v-on:keyup.enter="addTodoWed()" placeholder="Add item to Wednesday Agenda...">
                     </div>
                      
                     <div>
-                        <input type="text" v-model="newTodoThu">
-                        <button v-on:click="addTodoThu()">Add item to Thursday Agenda</button>
+                        <input type="text" v-model="newTodoThu" v-on:keyup.enter="addTodoThu()" placeholder="Add item to Thursday Agenda...">
                     </div>
                     
                     <div>
-                        <input type="text" v-model="newTodoFri">
-                        <button v-on:click="addTodoFri()">Add item to Friday Agenda</button>
+                        <input type="text" v-model="newTodoFri" v-on:keyup.enter="addTodoFri()" placeholder="Add item to Friday Agenda...">
                     </div>
     
                     <div>
-                        <input type="text" v-model="newTodoSat">
-                        <button v-on:click="addTodoSat()">Add item to Saturday Agenda</button>
+                        <input type="text" v-model="newTodoSat" v-on:keyup.enter="addTodoSat()" placeholder="Add item to Saturday Agenda...">
                     </div>
                 </div>
                 
                 <!-- chartJS input -->
                 <div class="inputChart">
-                    <input type="text" id="mondaySteps">
+                    <input type="text" id="mondaySteps" placeholder="Update Steps...">
                     <button onclick="updateMonday(document.getElementById('mondaySteps').value)">Update Steps</button>
                 </div>
             </article>

@@ -74,7 +74,7 @@ nav {
 nav a {
     font-size: 2em;
     padding: 10px;
-    color: blue;
+    color:#6e7582;
 }
 
 .text_hover {
@@ -85,7 +85,6 @@ nav a {
 a:hover .text_hover {
     display: block;
     position: absolute;
-    background: #222222;
     color: #ffffff;
 }
 
@@ -102,20 +101,39 @@ html {
     font-weight:300;
 }
 
-ol, ul {
+article ol, ul {
     list-style: none;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-li {
+article li {
     border-top: 2px solid rebeccapurple;
     margin-top: 5px;
 }
 
-li p {
+article li p {
     margin-top: 3px;
     margin-bottom: 3px;
+}
+
+input[type=text] {
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    transition: width 0.4s ease-in-out;
+}
+  
+input[type=text]:focus {
+    width: 100%;
 }
 
 .charts {
@@ -136,6 +154,10 @@ li p {
     background: #ffffff;
     color: white;
     padding: 2rem;
+}
+
+.inputAgenda {
+    margin-bottom: 30px;
 }
 
 #motivation {
