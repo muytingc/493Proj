@@ -67,14 +67,23 @@ nav {
     overflow: hidden;
     width: 100%;
     height: 4em;
+    /* line-height: 4em; */
     z-index: 80;
     background: #aee1e1;
 }
 
 nav a {
+    text-align: left;
     font-size: 2em;
     padding: 10px;
     color:#6e7582;
+}
+
+nav div {
+    text-align: center;
+    margin-top: -1.25em;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 .text_hover {
@@ -226,4 +235,8 @@ input[type=text]:focus {
           margin:0.4em auto;
       }
     }
+}
+
+#settings {
+    text-align: center;
 }
