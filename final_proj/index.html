@@ -159,6 +159,7 @@
             <article id="settings" v-bind:class="{active_block: settings_active}">
                 <h1>Settings</h1>
 
+                <h3>Agenda</h3>
                 <!-- Agenda input -->
                 <div class="inputAgenda">
                     <div>
@@ -201,11 +202,61 @@
                         <input type="text" v-model="newTodoSat" v-on:keyup.enter="addTodoSat()" placeholder="Add item to Saturday Agenda...">
                     </div>
                 </div>
+
+                <hr>
                 
                 <!-- chartJS input -->
+                <h3>Step Counter</h3>
                 <div class="inputChart">
-                    <input type="text" id="mondaySteps" placeholder="Update Steps...">
+                    <div>
+                        <input type="text" id="sundaySteps" placeholder="Update Sunday Steps...">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" id="mondaySteps" placeholder="Update Monday Steps...">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" id="tuesdaySteps" placeholder="Update Tuesday Steps...">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" id="wednesdaySteps" placeholder="Update Wednesday Steps...">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" id="thursdaySteps" placeholder="Update Thursday Steps...">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" id="fridaySteps" placeholder="Update Friday Steps...">
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <input type="text" id="saturdaySteps" placeholder="Update Saturday Steps...">
+                    </div>
+
+                    <br>
+                    <hr>
+
+                    <h3>Activities</h3>
+                    <div>
+                        <input type="text" id="completedActivities" placeholder="Update Completed Activities...">
+                    </div>
                 </div>
+
             </article>
         </div>
         <!-- end of main -->
@@ -550,13 +601,13 @@
         }
     });
 
-    var totalTasks = 100;
-    var tasksComplete = 25; //Replace this with the input by the user
     var ctx1 = document.getElementById('actChart');
+    var totalTasks = 100;
+    var tasksComplete = 0; //Replace this with the input by the user
     var actChart = new Chart(ctx1, {
         type: 'pie',
         data: {
-            labels: ['complete', 'Incomplete'],
+            labels: ['Complete', 'Incomplete'],
             datasets: [{
                 label: 'Personal Steps',
                 data: [tasksComplete, totalTasks - tasksComplete],
@@ -577,21 +628,107 @@
         }
     });
 
-    function updateMonday(mondaySteps){
-        userSteps[1] = mondaySteps;
+    function updateSteps(day, dailySteps){
+        userSteps[day] = dailySteps;
         stepsChart.update();
     }
+
+    $('#sundaySteps').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            updateSteps(0, document.getElementById('sundaySteps').value);
+            var input_val = $.trim( $('#sundaySteps').val() );
+            if (input_val.length) {
+                input_val = "";
+            }
+            $('#sundaySteps').val(input_val)
+        }
+    });
 
     $('#mondaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateMonday(document.getElementById('mondaySteps').value);
+            updateSteps(1, document.getElementById('mondaySteps').value);
             var input_val = $.trim( $('#mondaySteps').val() );
             if (input_val.length) {
                 input_val = "";
             }
             $('#mondaySteps').val(input_val)
-        } 
+        }
+    });
+
+    $('#tuesdaySteps').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            updateSteps(2, document.getElementById('tuesdaySteps').value);
+            var input_val = $.trim( $('#tuesdaySteps').val() );
+            if (input_val.length) {
+                input_val = "";
+            }
+            $('#tuesdaySteps').val(input_val)
+        }
+    });
+
+    $('#wednesdaySteps').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            updateSteps(3, document.getElementById('wednesdaySteps').value);
+            var input_val = $.trim( $('#wednesdaySteps').val() );
+            if (input_val.length) {
+                input_val = "";
+            }
+            $('#wednesdaySteps').val(input_val)
+        }
+    });
+
+    $('#thursdaySteps').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            updateSteps(4, document.getElementById('thursdaySteps').value);
+            var input_val = $.trim( $('#thursdaySteps').val() );
+            if (input_val.length) {
+                input_val = "";
+            }
+            $('#thursdaySteps').val(input_val)
+        }
+    });
+
+    $('#fridaySteps').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            updateSteps(5, document.getElementById('fridaySteps').value);
+            var input_val = $.trim( $('#fridaySteps').val() );
+            if (input_val.length) {
+                input_val = "";
+            }
+            $('#fridaySteps').val(input_val)
+        }
+    });
+
+    $('#saturdaySteps').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            updateSteps(6, document.getElementById('saturdaySteps').value);
+            var input_val = $.trim( $('#saturdaySteps').val() );
+            if (input_val.length) {
+                input_val = "";
+            }
+            $('#saturdaySteps').val(input_val)
+        }
+    });
+
+    $('#completedActivities').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            tasksComplete = parseInt(document.getElementById('completedActivities').value);
+            actChart.data.datasets[0].data[0] = tasksComplete;
+            actChart.update();
+            var input_val = $.trim( $('#completedActivities').val() );
+            if (input_val.length) {
+                input_val = "";
+            }
+            $('#completedActivities').val(input_val);
+        }
     });
   </script>
 
