@@ -396,6 +396,9 @@
                     title: this.newTodoSun,
                     isStarred: false
                     });
+                    alert("SUCCESS");
+                } else {
+                    alert("ERROR: No input");
                 }
                 this.newTodoSun = '';
             },
@@ -405,6 +408,9 @@
                     title: this.newTodoMon,
                     isStarred: false
                     });
+                    alert("SUCCESS");
+                } else {
+                    alert("ERROR: No input");
                 }
                 this.newTodoMon = '';
             },
@@ -414,6 +420,9 @@
                     title: this.newTodoTue,
                     isStarred: false
                     });
+                    alert("SUCCESS");
+                } else {
+                    alert("ERROR: No input");
                 }
                 this.newTodoTue = '';
             },
@@ -423,6 +432,9 @@
                     title: this.newTodoWed,
                     isStarred: false
                     });
+                    alert("SUCCESS");
+                } else {
+                    alert("ERROR: No input");
                 }
                 this.newTodoWed = '';
             },
@@ -432,6 +444,9 @@
                     title: this.newTodoThu,
                     isStarred: false
                     });
+                    alert("SUCCESS");
+                } else {
+                    alert("ERROR: No input");
                 }
                 this.newTodoThu = '';
             },
@@ -441,6 +456,9 @@
                     title: this.newTodoFri,
                     isStarred: false
                     });
+                    alert("SUCCESS");
+                } else {
+                    alert("ERROR: No input");
                 }
                 this.newTodoFri = '';
             },
@@ -450,6 +468,9 @@
                     title: this.newTodoSat,
                     isStarred: false
                     });
+                    alert("SUCCESS");
+                } else {
+                    alert("ERROR: No input");
                 }
                 this.newTodoSat = '';
             },
@@ -636,84 +657,126 @@
     $('#sundaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateSteps(0, document.getElementById('sundaySteps').value);
-            var input_val = $.trim( $('#sundaySteps').val() );
-            if (input_val.length) {
-                input_val = "";
+            stepsSun = parseInt(document.getElementById('sundaySteps').value);
+            if (Number.isInteger(stepsSun)) {
+                updateSteps(0, stepsSun);
+                var input_val = $.trim( $('#sundaySteps').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#sundaySteps').val(input_val)
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#sundaySteps').val(input_val)
         }
     });
 
     $('#mondaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateSteps(1, document.getElementById('mondaySteps').value);
-            var input_val = $.trim( $('#mondaySteps').val() );
-            if (input_val.length) {
-                input_val = "";
+            stepsMon = parseInt(document.getElementById('mondaySteps').value);
+            if (Number.isInteger(stepsMon)) {
+                updateSteps(1, stepsMon);
+                var input_val = $.trim( $('#mondaySteps').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#mondaySteps').val(input_val)
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#mondaySteps').val(input_val)
         }
     });
 
     $('#tuesdaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateSteps(2, document.getElementById('tuesdaySteps').value);
-            var input_val = $.trim( $('#tuesdaySteps').val() );
-            if (input_val.length) {
-                input_val = "";
+            stepsTue = parseInt(document.getElementById('tuesdaySteps').value);
+            if (Number.isInteger(stepsTue)) {
+                updateSteps(2, stepsTue);
+                var input_val = $.trim( $('#tuesdaySteps').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#tuesdaySteps').val(input_val)
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#tuesdaySteps').val(input_val)
         }
     });
 
     $('#wednesdaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateSteps(3, document.getElementById('wednesdaySteps').value);
-            var input_val = $.trim( $('#wednesdaySteps').val() );
-            if (input_val.length) {
-                input_val = "";
+            stepsWed = parseInt(document.getElementById('wednesdaySteps').value);
+            if (Number.isInteger(stepsWed)) {
+                updateSteps(3, stepsWed);
+                var input_val = $.trim( $('#wednesdaySteps').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#wednesdaySteps').val(input_val)
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#wednesdaySteps').val(input_val)
         }
     });
 
     $('#thursdaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateSteps(4, document.getElementById('thursdaySteps').value);
-            var input_val = $.trim( $('#thursdaySteps').val() );
-            if (input_val.length) {
-                input_val = "";
+            stepsThu = parseInt(document.getElementById('thursdaySteps').value);
+            if (Number.isInteger(stepsThu)) {
+                updateSteps(4, stepsThu);
+                var input_val = $.trim( $('#thursdaySteps').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#thursdaySteps').val(input_val)
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#thursdaySteps').val(input_val)
         }
     });
 
     $('#fridaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateSteps(5, document.getElementById('fridaySteps').value);
-            var input_val = $.trim( $('#fridaySteps').val() );
-            if (input_val.length) {
-                input_val = "";
+            stepsFri = parseInt(document.getElementById('fridaySteps').value);
+            if (Number.isInteger(stepsFri)) {
+                updateSteps(5, stepsFri);
+                var input_val = $.trim( $('#fridaySteps').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#fridaySteps').val(input_val)
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#fridaySteps').val(input_val)
         }
     });
 
     $('#saturdaySteps').keypress(function(event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            updateSteps(6, document.getElementById('saturdaySteps').value);
-            var input_val = $.trim( $('#saturdaySteps').val() );
-            if (input_val.length) {
-                input_val = "";
+            stepsSat = parseInt(document.getElementById('saturdaySteps').value);
+            if (Number.isInteger(stepsSat)) {
+                updateSteps(6, stepsSat);
+                var input_val = $.trim( $('#saturdaySteps').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#saturdaySteps').val(input_val)
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#saturdaySteps').val(input_val)
         }
     });
 
@@ -721,13 +784,18 @@
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
             tasksComplete = parseInt(document.getElementById('completedActivities').value);
-            actChart.data.datasets[0].data[0] = tasksComplete;
-            actChart.update();
-            var input_val = $.trim( $('#completedActivities').val() );
-            if (input_val.length) {
-                input_val = "";
+            if (Number.isInteger(tasksComplete)) {
+                actChart.data.datasets[0].data[0] = tasksComplete;
+                actChart.update();
+                var input_val = $.trim( $('#completedActivities').val() );
+                if (input_val.length) {
+                    input_val = "";
+                }
+                $('#completedActivities').val(input_val);
+                alert("successfully updated!");
+            } else {
+                alert("ERROR: Must be an integer");
             }
-            $('#completedActivities').val(input_val);
         }
     });
   </script>
