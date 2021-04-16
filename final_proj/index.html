@@ -786,6 +786,7 @@
             tasksComplete = parseInt(document.getElementById('completedActivities').value);
             if (Number.isInteger(tasksComplete)) {
                 actChart.data.datasets[0].data[0] = tasksComplete;
+                actChart.data.datasets[0].data[1] = totalTasks - tasksComplete;
                 actChart.update();
                 var input_val = $.trim( $('#completedActivities').val() );
                 if (input_val.length) {
